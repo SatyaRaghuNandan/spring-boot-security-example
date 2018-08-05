@@ -13,10 +13,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @author GUNA SEKHAR
  *
  * GET - http://localhost:8070/api/admin/all
- * login - dummy(username) & pass(password)
+ * login - user(username) & pass(password)
  * 
  * GET - http://localhost:8070/api/user/1
- * login - sekhar(username) & pass(password)
+ * login - admin(username) & pass(password)
  * 
  * Post - http://localhost:8070/api/save
  * {
@@ -24,6 +24,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * 		"name":"ccc",
  * 		"salary":10000
  * }
+ * 
+ * https://github.com/kishanjavatrainer/SpringBootSecurityInMemoryAuthentication2
  *
  */
 
@@ -35,21 +37,31 @@ public class TestSecurityConfig extends WebSecurityConfigurerAdapter
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.csrf().disable().authorizeRequests()
+		/*http.csrf().disable().authorizeRequests()
 				.antMatchers("/api/user/**").hasAnyRole("admin","user")
 				.and().formLogin();
 		
 		http.csrf().disable().authorizeRequests()
 				.antMatchers("/api/admin/**").hasAnyRole("admin")
-				.and().formLogin();
+				.and().formLogin();*/
+		
+		http.csrf().disable().authorizeRequests()
+		.antMatchers("/api/user/**").hasAnyRole("admin","user")
+		.and().authorizeRequests()
+		.antMatchers("/api/admin/**").hasAnyRole("admin")
+		.and().formLogin();;
 		
 	}
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.inMemoryAuthentication().withUser("dummy").password("pass").roles("user");
-		auth.inMemoryAuthentication().withUser("sekhar").password("pass").roles("admin");
+		/*auth.inMemoryAuthentication().withUser("dummy").password("pass").roles("user");
+		auth.inMemoryAuthentication().withUser("sekhar").password("pass").roles("admin");*/
+		
+		auth.inMemoryAuthentication()
+			.withUser("user").password("pass").roles("user").and()
+			.withUser("admin").password("pass").roles("admin");;
 		
 	}
 	
