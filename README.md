@@ -16,3 +16,6 @@
  https://www.youtube.com/watch?v=dST7SfPFlf8&list=PLzS3AYzXBoj_OOobvCvUYwENKxFhwTyqH
  
  https://github.com/kishanjavatrainer/SpringBootSecurityInMemoryAuthentication/blob/master/SpringBootSecurityInMemoryAuthentication/src/main/java/com/infotech/book/ticket/app/config/SecurityConfig.java
+ 
+ 
+ https://github.com/kishanjavatrainer/SpringBootSecurityInMemoryAuthentication2
